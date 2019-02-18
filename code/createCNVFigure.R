@@ -1,10 +1,16 @@
+########################################
+#Author: Komal Rathi
+#Purpose: Create CNV Plot
+#Date: 11/01/2018
+########################################
+
 ################# CNV plot #####################
 library(ggplot2)
 library(dplyr)
 source('pubTheme.R')
 library(tidyr)
 
-data <- read.delim("../data/CleanDataFinal_V9.txt")
+data <- read.delim("../data/CleanDataFinal_V10.txt")
 cnv <- data[grep("CNV", data$Variant_Tier),c('Sample_ID','Type','CNV_Size','CNV_Type','Chromosome_Band','Chromosome','Type_varType','Variant_Tier')]
 cnv <- unique(cnv)
 

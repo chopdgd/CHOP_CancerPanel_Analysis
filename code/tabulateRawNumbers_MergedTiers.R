@@ -1,7 +1,7 @@
 ################################
 # Author: Komal Rathi
 # Purpose: Tabulate raw numbers
-# Date: 08/22/2018
+# Date: 10/25/2018
 # repeat the same but merging tier 1 and tier 2
 # for the bigTable, combine Tier 1 and Tier 2 
 ################################
@@ -10,7 +10,7 @@ library(reshape2)
 library(dplyr)
 
 # Read in cleaned data
-data <- read.delim("../data/CleanDataFinal_V9.txt")
+data <- read.delim("../data/CleanDataFinal_V10.txt")
 
 # add tier type
 data$Tier_Type <- ifelse(data$Variant_Tier %in% c("3","4","CNV Tier 3","Fusion Tier 3"), "Low", "High")
@@ -119,8 +119,8 @@ test <- data %>% group_by(Variant_Tier, Tier_Type) %>%
   summarise(ct = n(), genes = n_distinct(Gene))
 test <- data %>%
   filter(Gene != "" & Variant_Tier == "Combined_SNV_Tier_1A-1B-2") %>%
-  select(Gene)
-unique(test$Gene)
+  dplyr::select(Gene)
+length(unique(test$Gene))
 
 #### combining all ####
 

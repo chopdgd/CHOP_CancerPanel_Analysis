@@ -1,3 +1,9 @@
+########################################
+#Author: Komal Rathi
+#Purpose: Create Fusion Plot
+#Date: 10/29/2018
+########################################
+
 # this is the main one
 library(OmicCircos)
 library(biomaRt)
@@ -14,7 +20,7 @@ chr.po <- data.frame(chr=seg.n, po=(dat[,2]+dat[,3])/2, chr.n=chr.n)
 cols1  <- rainbow(nrow(dat), alpha=0.5);
 
 # fusion data (remove Fusion Tier 3)
-data <- read.delim("../data/CleanDataFinal_V9.txt")
+data <- read.delim("../data/CleanDataFinal_V10.txt")
 fusions <- data[grep("^Fusion", data$Variant_Tier),c('Patient_ID','Sample_ID','Type','X3_Transcript','X5_Transcript','Chromosome_Band','Gene','Type_varType','Variant_Tier')]
 fusions <- fusions[!fusions$Variant_Tier == "Fusion Tier 3",]
 fusions <- unique(fusions)
@@ -61,7 +67,7 @@ intersect(up_gene,dw_gene) # only RUNX1 remains
 
 
 ### plots
-pdf(file = '../figures/08222018/FusionPlot.pdf', width = 9, height = 9)
+pdf(file = '../figures/FusionPlot.pdf', width = 9, height = 9)
 # brain tumor
 x <- fs[which(fs$Type %in% "Brain Tumor"),]
 

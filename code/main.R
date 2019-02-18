@@ -1,7 +1,7 @@
 ########################################
 #Author: Pichai Raman, Komal Rathi
 #Purpose: Summarize data
-#Date: 02/01/2018
+#Date: 11/01/2018
 ########################################
 
 # Call libraries
@@ -17,7 +17,7 @@ source("pubTheme.R")
 source("proteinCodes.R")
 
 #Read in cleaned data
-data <- read.delim("../data/CleanDataFinal_V9.txt")
+data <- read.delim("../data/CleanDataFinal_V10.txt")
 
 ########################################
 #List of all Figures for paper
@@ -38,7 +38,7 @@ tmpDat <- data.frame(t(tmpDat))[2:3]
 p <- ggplot(tmpDat, aes(Var2, Freq))+geom_bar(stat="identity")+theme_Publication()
 p <- p+xlab("Cancer Type")+ylab("Frequency")+ggtitle(paste("Sample Frequency (n=", sum(tmpDat[,2]), ")", sep=""))
 p
-ggsave("../figures/08222018/CancerTypeFrequencyBarChart.eps", width=9, height=5)
+ggsave("../figures/CancerTypeFrequencyBarChart.eps", width=9, height=5)
 
 # remove Tier 3 fusion from high tiers
 highTiers <- c("1A", "1B", "2","Tier 1B", "CNV Tier 1", "CNV Tier 1A", "CNV Tier 1B", "CNV Tier 2", "Fusion Tier 1", "Fusion Tier 2", "Fusion Tier 1A")
@@ -52,7 +52,7 @@ tmpDat <- data.frame(t(tmpDat))[2:3]
 p <- ggplot(tmpDat, aes(Var2, Freq))+geom_bar(stat="identity")+theme_Publication()
 p <- p+xlab("Cancer Type")+ylab("Frequency")+ggtitle(paste("Sample Frequency (n=", sum(tmpDat[,2]), ")", sep=""))
 p
-ggsave("../figures/08222018/CancerTypeFrequencyBarChartHighTier.eps", width=9, height=5)
+ggsave("../figures/CancerTypeFrequencyBarChartHighTier.eps", width=9, height=5)
 
 # Plot 2, 3, 4
 # Function
@@ -120,17 +120,17 @@ createPlot2 <- function(dataHT, x, freqCut=1) {
 }
 
 # remove NUDT51, TPMT, MPL from Brain
-png("../figures/08222018/OncoprintBrainTumor.png", height=1440, width=2880, res=200)
+png("../figures/OncoprintBrainTumor.png", height=1440, width=2880, res=200)
 createPlot2(dataHT = dataHT[-which(dataHT$Gene %in% c("NUDT15","TPMT","MPL")),], "Brain Tumor")
 dev.off()
 
 # keep MPL here
-png("../figures/08222018/OncoprintLiquidTumors.png", height=1440, width=2880, res=200)
+png("../figures/OncoprintLiquidTumors.png", height=1440, width=2880, res=200)
 createPlot2(dataHT = dataHT[-which(dataHT$Gene %in% c("NUDT15","TPMT")),], "Liquid Tumor")
 dev.off()
 
 # remove all three from Solid tumors
-png("../figures/08222018/OncoprintNonCNS_Solid.png", height=1440, width=2880, res=200)
+png("../figures/OncoprintNonCNS_Solid.png", height=1440, width=2880, res=200)
 createPlot2(dataHT = dataHT[-which(dataHT$Gene %in% c("NUDT15","TPMT","MPL")),], "Solid Tumor (Non-CNS)")
 dev.off()
 
@@ -154,7 +154,7 @@ p <- ggplot(tmpData, aes(Mutation, Freq, fill = Type)) +
   theme_Publication() + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=.5)) + 
   scale_y_continuous(breaks= pretty_breaks(n = 10))
-png("../figures/08222018/ProteinChange.png", height=1440, width=2880, res=200)
+png("../figures/ProteinChange.png", height=1440, width=2880, res=200)
 p
 dev.off()
 
@@ -179,11 +179,11 @@ p <- ggplot(tmpData, aes(Genes, Freq, fill = Type)) +
   theme_Publication() + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=.5)) + 
   scale_y_continuous(breaks= pretty_breaks(n = 10))
-png("../figures/08222018/ProteinChange_genelevel.png", height=1240, width=3700, res=200)
+png("../figures/ProteinChange_genelevel.png", height=1240, width=3700, res=200)
 p
 dev.off()
 
-# Supplementary Figure 1
+# Supplementary Figure 1 (added Fusion Tier 3)
 lowTiers <- c("3", "4", "CNV Tier 3") 
 dataLT <- data[data[,"Variant_Tier"] %in% lowTiers,]
 tmpData <- dataLT[,c("Type", "Gene", "Protein_Change")]
@@ -204,7 +204,7 @@ p <- ggplot(tmpData, aes(Mutation, Freq, fill = Type)) +
   geom_bar(stat="identity") + theme_Publication() + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=.5)) + 
   scale_y_continuous(breaks= pretty_breaks())
-png("../figures/08222018/ProteinChangeLowTiers.png", height=1440, width=2880, res=200)
+png("../figures/ProteinChangeLowTiers.png", height=1440, width=2880, res=200)
 p
 dev.off()
 
@@ -216,25 +216,6 @@ tmpData <- as.data.frame(as.matrix(tmpData))
 tmpData <- tmpData[tmpData$Freq>0,]
 p <- ggplot(tmpData, aes(Variant_Tier, Freq)) + geom_bar(stat="identity") + facet_wrap(~Type, nrow = 3) + theme_Publication()
 p <- p + theme(axis.text.x = element_text(angle = 90, hjust = 1))
-png("../figures/08222018/FreqLesionsByVariantTier.png", height=1440, width=1000, res=200)
+png("../figures/FreqLesionsByVariantTier.png", height=1440, width=1000, res=200)
 p
 dev.off()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

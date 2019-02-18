@@ -1,7 +1,7 @@
 ################################
 # Author: Komal Rathi
 # Purpose: Tabulate raw numbers
-# Date: 08/22/2018
+# Date: 11/01/2018
 ################################
 
 library(reshape2)
@@ -9,7 +9,7 @@ library(dplyr)
 library(tidyr)
 
 # Read in cleaned data
-data <- read.delim("../data/CleanDataFinal_V9.txt", stringsAsFactors = F)
+data <- read.delim("../data/CleanDataFinal_V10.txt", stringsAsFactors = F)
 
 # add tier type
 data$Tier_Type <- ifelse(data$Variant_Tier %in% c("3","4","CNV Tier 3","Fusion Tier 3"), "Low", "High")
@@ -25,8 +25,8 @@ np <- length(unique(data$Patient_ID)) # 367
 ns <- length(unique(data$Sample_ID)) # 389
 
 # ave age across dataset
-mean(data$Age_Years)
-median(data$Age_Years)
+mean(data$Age_Years) # 8.580821
+median(data$Age_Years) # 7
 
 # patient IDs that have multiple sample IDs
 ct <- unique(data[,c('Sample_ID','Patient_ID')])
