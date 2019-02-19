@@ -5,7 +5,7 @@ Analysis and visualization of CHOP Cancer Panel Data. Code to support manuscript
 **Clinical Utility of Custom-designed NGS Panel Testing in Pediatric Tumors**
 
 
-### Main Code for tables/figures (use v10 as input):
+### Main Code for tables/figures:
 - main.R (barcharts, oncoprints)
 - tabulateRawNumbers.R -> create tables for paper
 - tabulateRawNumbers_MergedTiers.R -> create tables using merged tiers for paper
